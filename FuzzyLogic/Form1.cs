@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace FuzzyLogic
 {
@@ -68,52 +69,45 @@ namespace FuzzyLogic
                 chart4.ChartAreas["Wiek"].AxisY.Maximum = 1;
                 chart4.ChartAreas["Wiek"].AxisX.Title = "x";
                 chart4.ChartAreas["Wiek"].AxisY.Title = "μ";
+                chart4.ChartAreas["Wiek"].AxisY.TitleFont = new Font("Microsoft Sans Serif",10);
+                chart4.ChartAreas["Wiek"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
 
                 chart5.ChartAreas["Predkość"].AxisX.Minimum = 20;
                 chart5.ChartAreas["Predkość"].AxisY.Maximum = 1;
                 chart5.ChartAreas["Predkość"].AxisX.Title = "x";
                 chart5.ChartAreas["Predkość"].AxisY.Title = "μ";
+                chart5.ChartAreas["Predkość"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
+                chart5.ChartAreas["Predkość"].AxisY.TitleFont = new Font("Microsoft Sans Serif", 10);
 
                 chart6.ChartAreas["Ryzyko"].AxisX.Minimum = 0;
                 chart6.ChartAreas["Ryzyko"].AxisY.Maximum = 1;
                 chart6.ChartAreas["Ryzyko"].AxisX.Title = "x";
                 chart6.ChartAreas["Ryzyko"].AxisY.Title = "μ";
+                chart6.ChartAreas["Ryzyko"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
+                chart6.ChartAreas["Ryzyko"].AxisY.TitleFont = new Font("Microsoft Sans Serif", 10);
             }
 
+            foreach (Series s in chart4.Series)
+            {
+                s.ChartArea = "Wiek";
+                s.BorderWidth = 5;
+                s.ChartType = SeriesChartType.Line;
+            }
 
-            chart4.Series["Młody"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart4.Series["Młody"].ChartArea = "Wiek";
+            foreach (Series s in chart5.Series)
+            {
+                s.ChartArea = "Predkość";
+                s.BorderWidth = 5;
+                s.ChartType = SeriesChartType.Line;
+            }
 
-            chart4.Series["Średni"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart4.Series["Średni"].ChartArea = "Wiek";
+            foreach (Series s in chart6.Series)
+            {
+                s.ChartArea = "Ryzyko";
+                s.BorderWidth = 5;
+                s.ChartType = SeriesChartType.Line;
+            }
 
-            chart4.Series["Stary"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart4.Series["Stary"].ChartArea = "Wiek";
-
-
-            chart5.Series["Niska"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart5.Series["Niska"].ChartArea = "Predkość";
-
-            chart5.Series["Średnia"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart5.Series["Średnia"].ChartArea = "Predkość";
-
-            chart5.Series["Duża"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart5.Series["Duża"].ChartArea = "Predkość";
-
-            chart6.Series["Niskie"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart6.Series["Niskie"].ChartArea = "Ryzyko";
-
-            chart6.Series["Śr_nisk"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart6.Series["Śr_nisk"].ChartArea = "Ryzyko";
-
-            chart6.Series["Średnie"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart6.Series["Średnie"].ChartArea = "Ryzyko";
-
-            chart6.Series["Śr_wys"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart6.Series["Śr_wys"].ChartArea = "Ryzyko";
-
-            chart6.Series["Wysokie"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart6.Series["Wysokie"].ChartArea = "Ryzyko";
 
             this.ResumeLayout(false);
         }
