@@ -62,16 +62,26 @@ namespace AForge.Fuzzy
             database.AddVariable(lvTemperature);
 
             int j = 0;
+            double y1;
+            double y2;
+            double y3;
             for (float x = 20; x < 60; x += 0.25f, j++)
             {
-                double y1 = lvTemperature.GetLabelMembership("młody", x);
-                double y2 = lvTemperature.GetLabelMembership("średni", x);
-                double y3 = lvTemperature.GetLabelMembership("stary", x);
-
-
-                chart4.Series["Młody"].Points.AddXY(x, y1);
-                chart4.Series["Średni"].Points.AddXY(x, y2);
-                chart4.Series["Stary"].Points.AddXY(x, y3);
+                if (lvTemperature.GetLabelMembership("młody", x + 0.25f) + lvTemperature.GetLabelMembership("młody", x) > 0)
+                {
+                    y1 = lvTemperature.GetLabelMembership("młody", x);
+                    chart4.Series["Młody"].Points.AddXY(x, y1);
+                }
+                if (lvTemperature.GetLabelMembership("średni", x + 0.25f) + lvTemperature.GetLabelMembership("średni", x) > 0)
+                {
+                    y2 = lvTemperature.GetLabelMembership("średni", x);
+                    chart4.Series["Średni"].Points.AddXY(x, y2);
+                }
+                if (lvTemperature.GetLabelMembership("stary", x + 0.25f) + lvTemperature.GetLabelMembership("stary", x) > 0)
+                {
+                    y3 = lvTemperature.GetLabelMembership("stary", x);
+                    chart4.Series["Stary"].Points.AddXY(x, y3);
+                }      
             }
         }
 
@@ -93,16 +103,28 @@ namespace AForge.Fuzzy
 
             database.AddVariable(Power);
 
+            double y1;
+            double y2;
+            double y3;
             int j = 0;
             for (float x = 20; x < 220; x += 0.7f, j++)
             {
-                double y1 = Power.GetLabelMembership("mała", x);
-                double y2 = Power.GetLabelMembership("średnia", x);
-                double y3 = Power.GetLabelMembership("duża", x);
+                if (Power.GetLabelMembership("mała", x + 0.7f) + Power.GetLabelMembership("mała", x) > 0)
+                {
+                    y1 = Power.GetLabelMembership("mała", x);
+                    chart5.Series["Niska"].Points.AddXY(x, y1);
+                }
 
-                chart5.Series["Niska"].Points.AddXY(x, y1);
-                chart5.Series["Średnia"].Points.AddXY(x, y2);
-                chart5.Series["Duża"].Points.AddXY(x, y3);
+                if (Power.GetLabelMembership("średnia", x + 0.7f) + Power.GetLabelMembership("średnia", x) > 0)
+                {
+                    y2 = Power.GetLabelMembership("średnia", x);
+                    chart5.Series["Średnia"].Points.AddXY(x, y2);
+                }
+                if (Power.GetLabelMembership("duża", x + 0.7f) + Power.GetLabelMembership("duża", x) > 0)
+                {
+                    y3 = Power.GetLabelMembership("duża", x);
+                    chart5.Series["Duża"].Points.AddXY(x, y3);
+                }
             }
         }
 
@@ -136,7 +158,7 @@ namespace AForge.Fuzzy
             double y3;
             double y4;
             double y5;
-            for (float x = 0; x < 30 - 0.05; x += 0.05f, j++)
+            for (float x = 0; x < 30 ; x += 0.05f, j++)
             {
                 if (Risk.GetLabelMembership("niskie", x + 0.05f) + Risk.GetLabelMembership("niskie", x) > 0)
                 {
