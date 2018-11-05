@@ -191,10 +191,10 @@ namespace AForge.Fuzzy
         private void SetRules()
         {
             this.rules = new List<Rule>();
-            Rule rule1 = new Rule(database, "Norm", "IF Temperatura is zimne Moc_samochodu is duża then Ryzyko is wysokie");
-            Rule rule2 = new Rule(database, "Norm", "IF Temperatura is zimne Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
-            Rule rule3 = new Rule(database, "Norm", "IF Temperatura is średnie Moc_samochodu is duża then Ryzyko is średnio_wysokie");
-            Rule rule4 = new Rule(database, "Norm", "IF Temperatura is średnie Moc_samochodu is średnia then Ryzyko is średnie");
+            Rule rule1 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is duża then Ryzyko is wysokie");
+            Rule rule2 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
+            Rule rule3 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is duża then Ryzyko is średnio_wysokie");
+            Rule rule4 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is średnia then Ryzyko is średnie");
 
             rules.Add(rule1);
             rules.Add(rule2);
@@ -256,8 +256,7 @@ namespace AForge.Fuzzy
         {
             int j = 0;
             int series_number = -1;
-            int series_count = 0;
-            List<int> list = new List<int>();
+            List<Tuple<int,double,int>> list = new List<Tuple<int,double,int>>();
             List<Series> series = new List<Series>();
             foreach (float r in result)
             {
@@ -278,19 +277,7 @@ namespace AForge.Fuzzy
                         break;
                 }
 
-                foreach (int i in list)
-                {
-                    if (i.Equals(series_number))
-                    {
-                        int buff = list.IndexOf(i);
-                        if (result[buff] > r)
-                        {
-                            chart6.Series.RemoveAt(5 + buff);
-                            series_count--;
-                        }
-                    }
-                }
-                list.Add(series_number);
+                list.Add(new Tuple<int, double,int>(series_number, r, j + 5));
 
                 Series newSeries = new Series();
                 series.Add(newSeries);
@@ -312,12 +299,22 @@ namespace AForge.Fuzzy
                 }
 
                 chart6.Series.Add(newSeries);
-                chart6.Series[5 + series_count].ChartType = SeriesChartType.Range;
-                chart6.Series[5 + series_count].IsVisibleInLegend = false;
-                chart6.Series[5 + series_count].Color = RandomColor();
+                chart6.Series[5 + j].ChartType = SeriesChartType.Range;
+                chart6.Series[5 + j].IsVisibleInLegend = false;
+                chart6.Series[5 + j].Color = RandomColor();
 
                 j++;
-                series_count++;
+            }
+
+            foreach (Tuple<int,double,int> i in list)
+            {
+                foreach(Tuple<int, double,int> l in list)
+                {
+                    if (i.Item1 == l.Item1 && i.Item2 > l.Item2) ////  > - Min , < - Max
+                    {
+                        chart6.Series.RemoveAt(i.Item3);
+                    }
+                }
             }
         }
         public Color RandomColor()
