@@ -29,7 +29,12 @@ namespace FuzzyLogic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            if (textBox3.Text != "")
+            {
+                ClearCharts();
+                problemSolver = new ProblemSolver(chart4, chart5, chart6);
+            }
+
             try
             {    
                 results = problemSolver.Solve(Convert.ToDouble(textBoxSpeed.Text), Convert.ToDouble(textBoxTemp.Text));
@@ -51,10 +56,10 @@ namespace FuzzyLogic
              this.SuspendLayout();
             // Series
             {
-                chart4.Series.Add("Młody");
-                chart4.Series.Add("Średni");
-                chart4.Series.Add("Stary");
-                chart5.Series.Add("Niska");
+                chart4.Series.Add("Zimne");
+                chart4.Series.Add("Średnie");
+                chart4.Series.Add("Gorące");
+                chart5.Series.Add("Mała");
                 chart5.Series.Add("Średnia");
                 chart5.Series.Add("Duża");
                 chart6.Series.Add("Niskie");
@@ -66,20 +71,20 @@ namespace FuzzyLogic
 
             // Areas
             {
-                chart4.ChartAreas.Add("Wiek");
+                chart4.ChartAreas.Add("Temperatura");
                 chart5.ChartAreas.Add("Predkość");
                 chart6.ChartAreas.Add("Ryzyko");
             }
 
             // Axis
             {
-                chart4.ChartAreas["Wiek"].AxisX.Minimum = 20;
-                chart4.ChartAreas["Wiek"].AxisY.Maximum = 1;
-                chart4.ChartAreas["Wiek"].AxisX.Title = "x";
-                chart4.ChartAreas["Wiek"].AxisY.Title = "μ";
-                chart4.ChartAreas["Wiek"].AxisY.TitleFont = new Font("Microsoft Sans Serif",10);
-                chart4.ChartAreas["Wiek"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
-                chart4.ChartAreas["Wiek"].AxisX.Interval = 5;
+                chart4.ChartAreas["Temperatura"].AxisX.Minimum = 20;
+                chart4.ChartAreas["Temperatura"].AxisY.Maximum = 1;
+                chart4.ChartAreas["Temperatura"].AxisX.Title = "x";
+                chart4.ChartAreas["Temperatura"].AxisY.Title = "μ";
+                chart4.ChartAreas["Temperatura"].AxisY.TitleFont = new Font("Microsoft Sans Serif",10);
+                chart4.ChartAreas["Temperatura"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
+                chart4.ChartAreas["Temperatura"].AxisX.Interval = 5;
 
                 chart5.ChartAreas["Predkość"].AxisX.Minimum = 20;
                 chart5.ChartAreas["Predkość"].AxisY.Maximum = 1;
@@ -100,7 +105,7 @@ namespace FuzzyLogic
 
             foreach (Series s in chart4.Series)
             {
-                s.ChartArea = "Wiek";
+                s.ChartArea = "Temperatura";
                 s.BorderWidth = 4;
                 s.ChartType = SeriesChartType.Line;
             }
@@ -124,12 +129,15 @@ namespace FuzzyLogic
         }
         public void ClearCharts()
         {
-            foreach (Series s in chart4.Series)
-                s.Points.Clear();
-            foreach (Series s in chart5.Series)
-                s.Points.Clear();
-            foreach (Series s in chart6.Series)
-                s.Points.Clear();
+            chart4.Series.Clear();
+            chart5.Series.Clear();
+            chart6.Series.Clear();
+
+            chart4.ChartAreas.RemoveAt(0);
+            chart5.ChartAreas.RemoveAt(0);
+            chart6.ChartAreas.RemoveAt(0);
+          
+
 
             SetInitialCharts();
         }

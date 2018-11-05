@@ -20,7 +20,7 @@ namespace AForge.Fuzzy
         public List<Rule> rules;
         public Database database;
 
-        public LinguisticVariable lvTemperature;
+        public LinguisticVariable Temp_opon;
         public LinguisticVariable Power;
         public LinguisticVariable Risk;
 
@@ -46,40 +46,40 @@ namespace AForge.Fuzzy
 
         public void SetInput1()
         {
-            this.lvTemperature = new LinguisticVariable("Wiek", 20, 60);
+            this.Temp_opon = new LinguisticVariable("Temperatura", 20, 60);
 
             TrapezoidalFunction function1 = new TrapezoidalFunction(30, 40, TrapezoidalFunction.EdgeType.Right);
-            FuzzySet set1 = new FuzzySet("młody", function1);
+            FuzzySet set1 = new FuzzySet("zimne", function1);
             TrapezoidalFunction function2 = new TrapezoidalFunction(30, 40, 50);
-            FuzzySet set2 = new FuzzySet("średni", function2);
+            FuzzySet set2 = new FuzzySet("średnie", function2);
             TrapezoidalFunction function3 = new TrapezoidalFunction(40, 50, TrapezoidalFunction.EdgeType.Left);
-            FuzzySet set3 = new FuzzySet("stary", function3);
+            FuzzySet set3 = new FuzzySet("gorące", function3);
 
-            lvTemperature.AddLabel(set1);
-            lvTemperature.AddLabel(set2);
-            lvTemperature.AddLabel(set3);
+            Temp_opon.AddLabel(set1);
+            Temp_opon.AddLabel(set2);
+            Temp_opon.AddLabel(set3);
 
-            database.AddVariable(lvTemperature);
+            database.AddVariable(Temp_opon);
 
             double y1;
             double y2;
             double y3;
             for (float x = 20; x < 60; x += 0.25f)
             {
-                if (lvTemperature.GetLabelMembership("młody", x + 0.25f) + lvTemperature.GetLabelMembership("młody", x) > 0)
+                if (Temp_opon.GetLabelMembership("zimne", x + 0.25f) + Temp_opon.GetLabelMembership("zimne", x) > 0)
                 {
-                    y1 = lvTemperature.GetLabelMembership("młody", x);
-                    chart4.Series["Młody"].Points.AddXY(x, y1);
+                    y1 = Temp_opon.GetLabelMembership("zimne", x);
+                    chart4.Series["Zimne"].Points.AddXY(x, y1);
                 }
-                if (lvTemperature.GetLabelMembership("średni", x + 0.25f) + lvTemperature.GetLabelMembership("średni", x) > 0)
+                if (Temp_opon.GetLabelMembership("średnie", x + 0.25f) + Temp_opon.GetLabelMembership("średnie", x) > 0)
                 {
-                    y2 = lvTemperature.GetLabelMembership("średni", x);
-                    chart4.Series["Średni"].Points.AddXY(x, y2);
+                    y2 = Temp_opon.GetLabelMembership("średnie", x);
+                    chart4.Series["Średnie"].Points.AddXY(x, y2);
                 }
-                if (lvTemperature.GetLabelMembership("stary", x + 0.25f) + lvTemperature.GetLabelMembership("stary", x) > 0)
+                if (Temp_opon.GetLabelMembership("gorące", x + 0.25f) + Temp_opon.GetLabelMembership("gorące", x) > 0)
                 {
-                    y3 = lvTemperature.GetLabelMembership("stary", x);
-                    chart4.Series["Stary"].Points.AddXY(x, y3);
+                    y3 = Temp_opon.GetLabelMembership("gorące", x);
+                    chart4.Series["Gorące"].Points.AddXY(x, y3);
                 }      
             }
         }
@@ -110,7 +110,7 @@ namespace AForge.Fuzzy
                 if (Power.GetLabelMembership("mała", x + 0.5f) + Power.GetLabelMembership("mała", x) > 0)
                 {
                     y1 = Power.GetLabelMembership("mała", x);
-                    chart5.Series["Niska"].Points.AddXY(x, y1);
+                    chart5.Series["Mała"].Points.AddXY(x, y1);
                 }
 
                 if (Power.GetLabelMembership("średnia", x + 0.5f) + Power.GetLabelMembership("średnia", x) > 0)
@@ -191,10 +191,10 @@ namespace AForge.Fuzzy
         private void SetRules()
         {
             this.rules = new List<Rule>();
-            Rule rule1 = new Rule(database, "Norm", "IF Wiek is młody Moc_samochodu is duża then Ryzyko is wysokie");
-            Rule rule2 = new Rule(database, "Norm", "IF Wiek is młody Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
-            Rule rule3 = new Rule(database, "Norm", "IF Wiek is średni Moc_samochodu is duża then Ryzyko is średnio_wysokie");
-            Rule rule4 = new Rule(database, "Norm", "IF Wiek is średni Moc_samochodu is średnia then Ryzyko is średnie");
+            Rule rule1 = new Rule(database, "Norm", "IF Temperatura is zimne Moc_samochodu is duża then Ryzyko is wysokie");
+            Rule rule2 = new Rule(database, "Norm", "IF Temperatura is zimne Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
+            Rule rule3 = new Rule(database, "Norm", "IF Temperatura is średnie Moc_samochodu is duża then Ryzyko is średnio_wysokie");
+            Rule rule4 = new Rule(database, "Norm", "IF Temperatura is średnie Moc_samochodu is średnia then Ryzyko is średnie");
 
             rules.Add(rule1);
             rules.Add(rule2);
@@ -204,7 +204,7 @@ namespace AForge.Fuzzy
 
         public float[] Solve(double _speed, double _temp)
         {
-            lvTemperature.NumericInput = (float)_temp;
+            Temp_opon.NumericInput = (float)_temp;
             Power.NumericInput = (float)_speed;
 
 
@@ -244,7 +244,7 @@ namespace AForge.Fuzzy
                     if (p.XValue.Equals(_speed))
                     {
                         index = s.Points.IndexOf(p);
-                        s.Points[index].Color = System.Drawing.Color.Green;
+                        s.Points[index].Color = System.Drawing.Color.PaleGreen;
                     }
                 }
             }
@@ -319,9 +319,7 @@ namespace AForge.Fuzzy
                 j++;
                 series_count++;
             }
-            //chart6.Update();
         }
-
         public Color RandomColor()
         {
             return Color.FromArgb(rnd.Next(1,150), rnd.Next(1,150), rnd.Next(1,150));

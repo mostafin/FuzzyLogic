@@ -196,7 +196,7 @@
             // chart4
             // 
             legend1.Name = "Legend1";
-            legend1.Title = "Wiek";
+            legend1.Title = "Temperatura Opon";
             this.chart4.Legends.Add(legend1);
             this.chart4.Location = new System.Drawing.Point(12, 130);
             this.chart4.Name = "chart4";
@@ -218,11 +218,11 @@
             // chart6
             // 
             legend3.Name = "Legend1";
-            legend3.Title = "Ryzyko";
+            legend3.Title = "Ryzyko pęknięcia";
             this.chart6.Legends.Add(legend3);
-            this.chart6.Location = new System.Drawing.Point(305, 494);
+            this.chart6.Location = new System.Drawing.Point(244, 494);
             this.chart6.Name = "chart6";
-            this.chart6.Size = new System.Drawing.Size(792, 392);
+            this.chart6.Size = new System.Drawing.Size(911, 392);
             this.chart6.TabIndex = 8;
             this.chart6.Text = "chart6";
             // 
