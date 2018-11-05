@@ -46,13 +46,13 @@ namespace AForge.Fuzzy
 
         public void SetInput1()
         {
-            this.Temp_opon = new LinguisticVariable("Temperatura", 20, 60);
+            this.Temp_opon = new LinguisticVariable("Temperatura", 0, 180);
 
-            TrapezoidalFunction function1 = new TrapezoidalFunction(30, 40, TrapezoidalFunction.EdgeType.Right);
+            TrapezoidalFunction function1 = new TrapezoidalFunction(30, 90, TrapezoidalFunction.EdgeType.Right);
             FuzzySet set1 = new FuzzySet("zimne", function1);
-            TrapezoidalFunction function2 = new TrapezoidalFunction(30, 40, 50);
+            TrapezoidalFunction function2 = new TrapezoidalFunction(70, 90, 110);
             FuzzySet set2 = new FuzzySet("średnie", function2);
-            TrapezoidalFunction function3 = new TrapezoidalFunction(40, 50, TrapezoidalFunction.EdgeType.Left);
+            TrapezoidalFunction function3 = new TrapezoidalFunction(90, 150, TrapezoidalFunction.EdgeType.Left);
             FuzzySet set3 = new FuzzySet("gorące", function3);
 
             Temp_opon.AddLabel(set1);
@@ -64,19 +64,19 @@ namespace AForge.Fuzzy
             double y1;
             double y2;
             double y3;
-            for (float x = 20; x < 60; x += 0.25f)
+            for (float x = 0; x < 180; x += 0.5f)
             {
-                if (Temp_opon.GetLabelMembership("zimne", x + 0.25f) + Temp_opon.GetLabelMembership("zimne", x) > 0)
+                if (Temp_opon.GetLabelMembership("zimne", x + 0.5f) + Temp_opon.GetLabelMembership("zimne", x) > 0)
                 {
                     y1 = Temp_opon.GetLabelMembership("zimne", x);
                     chart4.Series["Zimne"].Points.AddXY(x, y1);
                 }
-                if (Temp_opon.GetLabelMembership("średnie", x + 0.25f) + Temp_opon.GetLabelMembership("średnie", x) > 0)
+                if (Temp_opon.GetLabelMembership("średnie", x + 0.5f) + Temp_opon.GetLabelMembership("średnie", x) > 0)
                 {
                     y2 = Temp_opon.GetLabelMembership("średnie", x);
                     chart4.Series["Średnie"].Points.AddXY(x, y2);
                 }
-                if (Temp_opon.GetLabelMembership("gorące", x + 0.25f) + Temp_opon.GetLabelMembership("gorące", x) > 0)
+                if (Temp_opon.GetLabelMembership("gorące", x + 0.5f) + Temp_opon.GetLabelMembership("gorące", x) > 0)
                 {
                     y3 = Temp_opon.GetLabelMembership("gorące", x);
                     chart4.Series["Gorące"].Points.AddXY(x, y3);
@@ -86,13 +86,13 @@ namespace AForge.Fuzzy
 
         public void SetInput2()
         {
-            this.Power = new LinguisticVariable("Moc_samochodu", 20, 220);
+            this.Power = new LinguisticVariable("Moc_samochodu", 20, 180);
 
-            TrapezoidalFunction function1 = new TrapezoidalFunction(70, 120, TrapezoidalFunction.EdgeType.Right);
+            TrapezoidalFunction function1 = new TrapezoidalFunction(40, 100, TrapezoidalFunction.EdgeType.Right);
             FuzzySet set1 = new FuzzySet("mała", function1);
-            TrapezoidalFunction function2 = new TrapezoidalFunction(70, 120, 170);
+            TrapezoidalFunction function2 = new TrapezoidalFunction(70, 100, 130);
             FuzzySet set2 = new FuzzySet("średnia", function2);
-            TrapezoidalFunction function3 = new TrapezoidalFunction(120, 170, TrapezoidalFunction.EdgeType.Left);
+            TrapezoidalFunction function3 = new TrapezoidalFunction(100, 160, TrapezoidalFunction.EdgeType.Left);
             FuzzySet set3 = new FuzzySet("duża", function3);
 
 
@@ -105,7 +105,7 @@ namespace AForge.Fuzzy
             double y1;
             double y2;
             double y3;
-            for (float x = 20; x < 220; x += 0.5f)
+            for (float x = 20; x < 180; x += 0.5f)
             {
                 if (Power.GetLabelMembership("mała", x + 0.5f) + Power.GetLabelMembership("mała", x) > 0)
                 {
@@ -194,7 +194,14 @@ namespace AForge.Fuzzy
             Rule rule1 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is duża then Ryzyko is wysokie");
             Rule rule2 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
             Rule rule3 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is duża then Ryzyko is średnio_wysokie");
-            Rule rule4 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is średnia then Ryzyko is średnie");
+            Rule rule4 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is średnia then Ryzyko is niskie");
+
+            Rule rule5 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is mała then Ryzyko is średnio_niskie");
+            Rule rule6 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is mała then Ryzyko is niskie");
+            Rule rule7 = new Rule(database, "CoNorm", "IF Temperatura is gorące Moc_samochodu is mała then Ryzyko is średnio_niskie");
+
+            Rule rule8 = new Rule(database, "CoNorm", "IF Temperatura is gorące Moc_samochodu is średnia then Ryzyko is średnie");
+            Rule rule9 = new Rule(database, "CoNorm", "IF Temperatura is gorące Moc_samochodu is średnia then Ryzyko is wysokie");
 
             rules.Add(rule1);
             rules.Add(rule2);
@@ -208,7 +215,7 @@ namespace AForge.Fuzzy
             Power.NumericInput = (float)_speed;
 
 
-            float[] result = new float[4];
+            float[] result = new float[9];
 
             for (int i = 0; i < rules.Count; i++)
             {
@@ -273,8 +280,24 @@ namespace AForge.Fuzzy
                         series_number = 3;
                         break;
                     case 3:
+                        series_number = 0;
+                        break;
+                    case 4:
+                        series_number = 1;
+                        break;
+                    case 5:
+                        series_number = 0;
+                        break;
+                    case 6:
+                        series_number = 1;
+                        break;
+                    case 7:
                         series_number = 2;
                         break;
+                    case 8:
+                        series_number = 4;
+                        break;
+
                 }
 
                 list.Add(new Tuple<int, double,int>(series_number, r, j + 5));

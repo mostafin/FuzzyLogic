@@ -42,7 +42,12 @@ namespace FuzzyLogic
                 textBox3.Text = "Wysokie na poziomie " + results[0].ToString();
                 textBox4.Text = "Średnio wysokie na poziomie " + results[1].ToString();
                 textBox5.Text = "Średnio wysokie na poziomie " + results[2].ToString();
-                textBox6.Text = "Średnie na poziomie " + results[3].ToString();
+                textBox6.Text = "Niskie na poziomie " + results[3].ToString();
+                textBox1.Text = "Średnio niskie na poziomie " + results[4].ToString();
+                textBox2.Text = "Niskie na poziomie " + results[5].ToString();
+                textBox7.Text = "Średnio niskie na poziomie " + results[6].ToString();
+                textBox8.Text = "Średnie na poziomie " + results[7].ToString();
+                textBox9.Text = "Wysokie na poziomie " + results[8].ToString();
             }
             catch(Exception)
             {
@@ -78,17 +83,17 @@ namespace FuzzyLogic
 
             // Axis
             {
-                chart4.ChartAreas["Temperatura"].AxisX.Minimum = 20;
+                chart4.ChartAreas["Temperatura"].AxisX.Minimum = 0;
                 chart4.ChartAreas["Temperatura"].AxisY.Maximum = 1;
-                chart4.ChartAreas["Temperatura"].AxisX.Title = "x";
+                chart4.ChartAreas["Temperatura"].AxisX.Title = "°C";
                 chart4.ChartAreas["Temperatura"].AxisY.Title = "μ";
                 chart4.ChartAreas["Temperatura"].AxisY.TitleFont = new Font("Microsoft Sans Serif",10);
                 chart4.ChartAreas["Temperatura"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
-                chart4.ChartAreas["Temperatura"].AxisX.Interval = 5;
+                chart4.ChartAreas["Temperatura"].AxisX.Interval = 20;
 
                 chart5.ChartAreas["Predkość"].AxisX.Minimum = 20;
                 chart5.ChartAreas["Predkość"].AxisY.Maximum = 1;
-                chart5.ChartAreas["Predkość"].AxisX.Title = "x";
+                chart5.ChartAreas["Predkość"].AxisX.Title = "km/h";
                 chart5.ChartAreas["Predkość"].AxisY.Title = "μ";
                 chart5.ChartAreas["Predkość"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
                 chart5.ChartAreas["Predkość"].AxisY.TitleFont = new Font("Microsoft Sans Serif", 10);
