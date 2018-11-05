@@ -198,9 +198,9 @@
             legend1.Name = "Legend1";
             legend1.Title = "Wiek";
             this.chart4.Legends.Add(legend1);
-            this.chart4.Location = new System.Drawing.Point(607, 141);
+            this.chart4.Location = new System.Drawing.Point(12, 130);
             this.chart4.Name = "chart4";
-            this.chart4.Size = new System.Drawing.Size(589, 253);
+            this.chart4.Size = new System.Drawing.Size(681, 352);
             this.chart4.TabIndex = 6;
             this.chart4.Text = "chart4";
             // 
@@ -209,9 +209,9 @@
             legend2.Name = "Legend1";
             legend2.Title = "Prędkość";
             this.chart5.Legends.Add(legend2);
-            this.chart5.Location = new System.Drawing.Point(12, 141);
+            this.chart5.Location = new System.Drawing.Point(709, 130);
             this.chart5.Name = "chart5";
-            this.chart5.Size = new System.Drawing.Size(589, 253);
+            this.chart5.Size = new System.Drawing.Size(694, 352);
             this.chart5.TabIndex = 7;
             this.chart5.Text = "chart5";
             // 
@@ -220,9 +220,9 @@
             legend3.Name = "Legend1";
             legend3.Title = "Ryzyko";
             this.chart6.Legends.Add(legend3);
-            this.chart6.Location = new System.Drawing.Point(227, 400);
+            this.chart6.Location = new System.Drawing.Point(305, 494);
             this.chart6.Name = "chart6";
-            this.chart6.Size = new System.Drawing.Size(783, 253);
+            this.chart6.Size = new System.Drawing.Size(792, 392);
             this.chart6.TabIndex = 8;
             this.chart6.Text = "chart6";
             // 
@@ -230,7 +230,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1202, 674);
+            this.ClientSize = new System.Drawing.Size(1423, 898);
             this.Controls.Add(this.chart6);
             this.Controls.Add(this.chart5);
             this.Controls.Add(this.chart4);

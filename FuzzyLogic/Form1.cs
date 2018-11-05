@@ -29,12 +29,20 @@ namespace FuzzyLogic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            results = problemSolver.Solve(Convert.ToDouble(textBoxSpeed.Text), Convert.ToDouble(textBoxTemp.Text));
+            
+            try
+            {    
+                results = problemSolver.Solve(Convert.ToDouble(textBoxSpeed.Text), Convert.ToDouble(textBoxTemp.Text));
 
-            textBox3.Text = "Wysokie na poziomie " + results[0].ToString();
-            textBox4.Text = "Średnio wysokie na poziomie " + results[1].ToString();
-            textBox5.Text = "Średnio wysokie na poziomie " + results[2].ToString();
-            textBox6.Text = "Średnie na poziomie " + results[3].ToString();
+                textBox3.Text = "Wysokie na poziomie " + results[0].ToString();
+                textBox4.Text = "Średnio wysokie na poziomie " + results[1].ToString();
+                textBox5.Text = "Średnio wysokie na poziomie " + results[2].ToString();
+                textBox6.Text = "Średnie na poziomie " + results[3].ToString();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Nie podano parametrów");
+            }
         }
 
 
@@ -71,6 +79,7 @@ namespace FuzzyLogic
                 chart4.ChartAreas["Wiek"].AxisY.Title = "μ";
                 chart4.ChartAreas["Wiek"].AxisY.TitleFont = new Font("Microsoft Sans Serif",10);
                 chart4.ChartAreas["Wiek"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
+                chart4.ChartAreas["Wiek"].AxisX.Interval = 5;
 
                 chart5.ChartAreas["Predkość"].AxisX.Minimum = 20;
                 chart5.ChartAreas["Predkość"].AxisY.Maximum = 1;
@@ -78,6 +87,7 @@ namespace FuzzyLogic
                 chart5.ChartAreas["Predkość"].AxisY.Title = "μ";
                 chart5.ChartAreas["Predkość"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
                 chart5.ChartAreas["Predkość"].AxisY.TitleFont = new Font("Microsoft Sans Serif", 10);
+                chart5.ChartAreas["Predkość"].AxisX.Interval = 20;
 
                 chart6.ChartAreas["Ryzyko"].AxisX.Minimum = 0;
                 chart6.ChartAreas["Ryzyko"].AxisY.Maximum = 1;
@@ -85,32 +95,43 @@ namespace FuzzyLogic
                 chart6.ChartAreas["Ryzyko"].AxisY.Title = "μ";
                 chart6.ChartAreas["Ryzyko"].AxisX.TitleFont = new Font("Microsoft Sans Serif", 10);
                 chart6.ChartAreas["Ryzyko"].AxisY.TitleFont = new Font("Microsoft Sans Serif", 10);
+                chart6.ChartAreas["Ryzyko"].AxisX.Interval = 2;
             }
 
             foreach (Series s in chart4.Series)
             {
                 s.ChartArea = "Wiek";
-                s.BorderWidth = 5;
+                s.BorderWidth = 4;
                 s.ChartType = SeriesChartType.Line;
             }
 
             foreach (Series s in chart5.Series)
             {
                 s.ChartArea = "Predkość";
-                s.BorderWidth = 5;
+                s.BorderWidth = 4;
                 s.ChartType = SeriesChartType.Line;
             }
 
             foreach (Series s in chart6.Series)
             {
                 s.ChartArea = "Ryzyko";
-                s.BorderWidth = 5;
+                s.BorderWidth = 4;
                 s.ChartType = SeriesChartType.Line;
             }
 
 
             this.ResumeLayout(false);
         }
+        public void ClearCharts()
+        {
+            foreach (Series s in chart4.Series)
+                s.Points.Clear();
+            foreach (Series s in chart5.Series)
+                s.Points.Clear();
+            foreach (Series s in chart6.Series)
+                s.Points.Clear();
 
+            SetInitialCharts();
+        }
     }
 }
