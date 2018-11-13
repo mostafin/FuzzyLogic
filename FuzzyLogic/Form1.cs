@@ -29,7 +29,7 @@ namespace FuzzyLogic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox3.Text != "")
+            if (textBox3.Text !="")
             {
                 ClearCharts();
                 problemSolver = new ProblemSolver(chart4, chart5, chart6);

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.textBoxSpeed = new System.Windows.Forms.TextBox();
             this.L_speed = new System.Windows.Forms.Label();
             this.textBoxTemp = new System.Windows.Forms.TextBox();
@@ -38,6 +38,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -49,11 +54,6 @@
             this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart6 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
@@ -139,6 +139,41 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Reguły";
             // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(619, 79);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(216, 20);
+            this.textBox9.TabIndex = 12;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(619, 53);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(216, 20);
+            this.textBox8.TabIndex = 11;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(619, 24);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(216, 20);
+            this.textBox7.TabIndex = 10;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(332, 79);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(216, 20);
+            this.textBox2.TabIndex = 9;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(332, 51);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(216, 20);
+            this.textBox1.TabIndex = 8;
+            // 
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(332, 25);
@@ -205,9 +240,9 @@
             // 
             // chart4
             // 
-            legend4.Name = "Legend1";
-            legend4.Title = "Temperatura Opon";
-            this.chart4.Legends.Add(legend4);
+            legend1.Name = "Legend1";
+            legend1.Title = "Temperatura Opon";
+            this.chart4.Legends.Add(legend1);
             this.chart4.Location = new System.Drawing.Point(12, 130);
             this.chart4.Name = "chart4";
             this.chart4.Size = new System.Drawing.Size(681, 352);
@@ -216,9 +251,9 @@
             // 
             // chart5
             // 
-            legend5.Name = "Legend1";
-            legend5.Title = "Prędkość";
-            this.chart5.Legends.Add(legend5);
+            legend2.Name = "Legend1";
+            legend2.Title = "Prędkość";
+            this.chart5.Legends.Add(legend2);
             this.chart5.Location = new System.Drawing.Point(709, 130);
             this.chart5.Name = "chart5";
             this.chart5.Size = new System.Drawing.Size(694, 352);
@@ -227,49 +262,14 @@
             // 
             // chart6
             // 
-            legend6.Name = "Legend1";
-            legend6.Title = "Przyczepność";
-            this.chart6.Legends.Add(legend6);
+            legend3.Name = "Legend1";
+            legend3.Title = "Ryzyko utraty przyczepności";
+            this.chart6.Legends.Add(legend3);
             this.chart6.Location = new System.Drawing.Point(244, 494);
             this.chart6.Name = "chart6";
             this.chart6.Size = new System.Drawing.Size(911, 392);
             this.chart6.TabIndex = 8;
             this.chart6.Text = "chart6";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(332, 51);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(216, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(332, 79);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(216, 20);
-            this.textBox2.TabIndex = 9;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(619, 24);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(216, 20);
-            this.textBox7.TabIndex = 10;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(619, 53);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(216, 20);
-            this.textBox8.TabIndex = 11;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(619, 79);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(216, 20);
-            this.textBox9.TabIndex = 12;
             // 
             // Form1
             // 

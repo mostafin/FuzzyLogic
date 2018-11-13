@@ -12,18 +12,18 @@ using AForge.Controls;
 using System.Windows.Forms.DataVisualization.Charting;
 
 
-
 namespace AForge.Fuzzy
 {
-    class ProblemSolver
+    class ProblemSolver 
     {
         public List<Rule> rules;
         public Database database;
-
         public LinguisticVariable Temp_opon;
         public LinguisticVariable Power;
         public LinguisticVariable Risk;
 
+        public INorm norm;
+        
         public System.Windows.Forms.DataVisualization.Charting.Chart chart4;
         public System.Windows.Forms.DataVisualization.Charting.Chart chart5;
         public System.Windows.Forms.DataVisualization.Charting.Chart chart6;
@@ -190,18 +190,20 @@ namespace AForge.Fuzzy
 
         private void SetRules()
         {
+            MinimumNorm minimum = new MinimumNorm();
+           // minimum.Evaluate(rule1);
             this.rules = new List<Rule>();
-            Rule rule1 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is duża then Ryzyko is wysokie");
-            Rule rule2 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
-            Rule rule3 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is duża then Ryzyko is średnio_wysokie");
-            Rule rule4 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is średnia then Ryzyko is niskie");
+            Rule rule1 = new Rule(database, "Test1", "IF Temperatura is zimne and Moc_samochodu is duża then Ryzyko is wysokie");
+            Rule rule2 = new Rule(database, "Test2", "IF Temperatura is zimne and Moc_samochodu is średnia then Ryzyko is średnio_wysokie");
+            Rule rule3 = new Rule(database, "Test3", "IF Temperatura is średnie and Moc_samochodu is duża then Ryzyko is średnio_wysokie");
+            Rule rule4 = new Rule(database, "Test4", "IF Temperatura is średnie and Moc_samochodu is średnia then Ryzyko is niskie");
 
-            Rule rule5 = new Rule(database, "CoNorm", "IF Temperatura is zimne Moc_samochodu is mała then Ryzyko is średnio_niskie");
-            Rule rule6 = new Rule(database, "CoNorm", "IF Temperatura is średnie Moc_samochodu is mała then Ryzyko is niskie");
-            Rule rule7 = new Rule(database, "CoNorm", "IF Temperatura is gorące Moc_samochodu is mała then Ryzyko is średnio_niskie");
+            Rule rule5 = new Rule(database, "Test5", "IF Temperatura is zimne and Moc_samochodu is mała then Ryzyko is średnio_niskie");
+            Rule rule6 = new Rule(database, "Test6", "IF Temperatura is średnie and Moc_samochodu is mała then Ryzyko is niskie");
+            Rule rule7 = new Rule(database, "Test7", "IF Temperatura is gorące and Moc_samochodu is mała then Ryzyko is średnio_niskie");
 
-            Rule rule8 = new Rule(database, "CoNorm", "IF Temperatura is gorące Moc_samochodu is średnia then Ryzyko is średnie");
-            Rule rule9 = new Rule(database, "CoNorm", "IF Temperatura is gorące Moc_samochodu is średnia then Ryzyko is wysokie");
+            Rule rule8 = new Rule(database, "Test8", "IF Temperatura is gorące and Moc_samochodu is średnia then Ryzyko is średnie");
+            Rule rule9 = new Rule(database, "Test9", "IF Temperatura is gorące and Moc_samochodu is średnia then Ryzyko is wysokie");
 
             rules.Add(rule1);
             rules.Add(rule2);
@@ -213,7 +215,7 @@ namespace AForge.Fuzzy
         {
             Temp_opon.NumericInput = (float)_temp;
             Power.NumericInput = (float)_speed;
-
+  
 
             float[] result = new float[9];
 
@@ -308,13 +310,13 @@ namespace AForge.Fuzzy
                 foreach (DataPoint d in chart6.Series[series_number].Points)
                 {
 
-                    if (d.YValues[0] < r)
+                    if (d.YValues[0] <= r)
                     {
                         newSeries.Points.AddXY(d.XValue, d.YValues[0]);
                     }
                     else
                     {
-                        if (series_number == 1 || series_number == 4)
+                        if (series_number == 0 || series_number == 4)
                         {
                             newSeries.Points.AddXY(d.XValue, r);
                         }
@@ -324,7 +326,8 @@ namespace AForge.Fuzzy
                 chart6.Series.Add(newSeries);
                 chart6.Series[5 + j].ChartType = SeriesChartType.Range;
                 chart6.Series[5 + j].IsVisibleInLegend = false;
-                chart6.Series[5 + j].Color = RandomColor();
+                //chart6.Series[5 + j].Color = RandomColor();
+                chart6.Series[5 + j].Color = Color.Crimson;
 
                 j++;
             }
